@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import { View,StyleSheet, TextInput, Button } from 'react-native'
+import React, { useState } from 'react'
+import { View, StyleSheet, TextInput, Button } from 'react-native'
 
 export default function GoalInput(props) {
   const [newGoal, setNewGoal] = useState('')
@@ -13,10 +13,13 @@ export default function GoalInput(props) {
         />
       </View>
       <View>
-        <Button title="Add Now " onPress={(e) => {
+        <Button
+          title="Add Now "
+          onPress={(e) => {
             props.handleAddGoal(newGoal)
             setNewGoal('')
-        }} />
+          }}
+        />
       </View>
     </View>
   )

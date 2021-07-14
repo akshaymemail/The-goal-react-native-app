@@ -1,14 +1,13 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 
 export default function GoalItem(props) {
   return (
-    <View style={styles.listItem}>
+    <TouchableOpacity activeOpacity={0.8} style={styles.listItem} onPress={e => props.removeGoal(props.id)} >
       <Text style={styles.textCenter}>{props.title}</Text>
-    </View>
+    </TouchableOpacity>
   )
 }
-
 const styles = StyleSheet.create({
   listItem: {
     marginVertical: 5,
@@ -18,5 +17,5 @@ const styles = StyleSheet.create({
   },
   textCenter: {
     textAlign: 'center',
-  }
+  },
 })

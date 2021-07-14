@@ -23,6 +23,11 @@ export default function App() {
       ])
     }
   }
+  const handleDeleteGoal  = id => {
+    // todo
+    setGoals(goals.filter(goal => goal.key !== id))
+    
+  }
   return (
     <SafeAreaView>
       <StatusBar style="auto" />
@@ -30,10 +35,10 @@ export default function App() {
         <View style={styles.heading}>
           <Text style={styles.headingText}>Add New Goal</Text>
         </View>
-        <GoalInput handleAddGoal = {handleAddGoal} />
+        <GoalInput handleAddGoal={handleAddGoal} />
         <FlatList
           data={goals}
-          renderItem={(itemData) => <GoalItem title={itemData.item.value} />}
+          renderItem={(itemData) => <GoalItem id={itemData.item.key}  title={itemData.item.value} removeGoal={handleDeleteGoal} />}
         ></FlatList>
       </View>
     </SafeAreaView>
