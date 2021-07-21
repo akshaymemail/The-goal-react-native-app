@@ -15,30 +15,42 @@ import GoalInput from './components/GoalInput'
 
 export default function App() {
   const [goals, setGoals] = useState([])
+  const [modal, setModal] = useState(false)
   const handleAddGoal = (newGoal) => {
     if (newGoal) {
       setGoals((preValue) => [
         { key: goals.length.toString(), value: newGoal },
         ...preValue,
       ])
+      setModal(false)
     }
   }
-  const handleDeleteGoal  = id => {
+  const handleDeleteGoal = (id) => {
     // todo
-    setGoals(goals.filter(goal => goal.key !== id))
-    
+    setGoals(goals.filter((goal) => goal.key !== id))
+  }
+  const cancelModalHandler = () => {
+    setModal(false)
   }
   return (
     <SafeAreaView>
       <StatusBar style="auto" />
       <View style={styles.layout}>
-        <View style={styles.heading}>
-          <Text style={styles.headingText}>Add New Goal</Text>
-        </View>
-        <GoalInput handleAddGoal={handleAddGoal} />
+        <Button title="Add new modal" onPress={() => setModal(!modal)} />
+        <GoalInput
+          handleAddGoal={handleAddGoal}
+          isModal={modal}
+          onCancel={cancelModalHandler}
+        />
         <FlatList
           data={goals}
-          renderItem={(itemData) => <GoalItem id={itemData.item.key}  title={itemData.item.value} removeGoal={handleDeleteGoal} />}
+          renderItem={(itemData) => (
+            <GoalItem
+              id={itemData.item.key}
+              title={itemData.item.value}
+              removeGoal={handleDeleteGoal}
+            />
+          )}
         ></FlatList>
       </View>
     </SafeAreaView>
